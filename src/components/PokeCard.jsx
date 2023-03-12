@@ -11,20 +11,15 @@ const PokeCard = ({ number }) => {
   const [loading, setLoading] = useState(true)
   const [background, setBackground] = useState("normal")
 
-  useEffect(() => {
-    fetch(`${URL}${number}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      }
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setPokemon(data)
-        setLoading(false)
-      })
-      .catch(err => {
-        document.querySelector("#root").children[0].children[0].children[1].innerHTML = "Aconteceu um erro ao buscar um ou mais Pokémon, recarregando a página..."
+  const getPokemon = async (url) => {
+    const res = await fetch(url)
+    const data = await res.json()
+
+    try {
+      setPokemon(data)
+      setLoading(false)
+    } catch (err) {
+      document.querySelector("#root").children[0].children[0].children[1].innerHTML = "Aconteceu um erro ao buscar um ou mais Pokémon, recarregando a página..."
         document.querySelector("#root").children[0].children[0].children[1].style.display = "flex"
         document.querySelector("#root").children[0].children[0].children[1].style.justifyContent = "center"
         document.querySelector("#root").children[0].children[0].children[1].style.alignItems = "center"
@@ -33,7 +28,12 @@ const PokeCard = ({ number }) => {
         setTimeout(() => {
           location.reload()
         }, 3500)
-      })
+    }
+  }
+
+  useEffect(() => {
+    const pokeApiUrl = `${URL}${number}`
+    getPokemon(pokeApiUrl)
   }, [])
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const PokeCard = ({ number }) => {
 
   return (
     <Link to={`pokedex/${number}`} className={styles.pokedex_pokemon}>
-      {loading && <h2 style={{color: "#333", fontSize: "1.2em"}}>Loading...</h2>}
+      {loading && <h2 style={{ color: "#333", fontSize: "1.2em" }}>Loading...</h2>}
       <div className={styles.pokedex_pokemon_image} style={{ backgroundImage: `url('../images/types-bg/${background}.jpeg')`, backgroundSize: "cover" }}>
         {pokemon.sprites && <img type-data={`${pokemon.types[0].type.name}`.toString()} src={`../images/animated/${number}.gif`} alt={pokemon.name} id={number} />}
       </div>

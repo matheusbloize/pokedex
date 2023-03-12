@@ -530,6 +530,7 @@
   }
 
   .pokedex_controller_mid {
+    border-top: 51px solid #000000;
     margin-top: 2.4em;
   }
 }
@@ -541,6 +542,7 @@
   }
   
   .pokedex_controller_mid {
+    border-top: 51px solid #000000;
     margin-top: 2.4em;
   }
 }
@@ -552,6 +554,7 @@
   }
 
   .pokedex_controller_mid {
+    border-top: 51px solid #000000;
     margin-top: 2.44em;
   }
 }
@@ -647,5 +650,9 @@
     width: 13em;
     margin-top: 27em;
     margin-left: 13em;
+  }
+
+  .pokedex_controller_mid {
+    border-top: 51px solid #000000;
   }
 }

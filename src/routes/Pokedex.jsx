@@ -14,26 +14,32 @@ const Pokedex = () => {
   const [height, setHeight] = useState()
   const [weight, setWeight] = useState()
   const [render, setRender] = useState(1)
+  const [loading, setLoading] = useState(false)
   const { id } = useParams()
   const navigate = useNavigate()
+
+  const getPokemon = async (url) => {
+    const res = await fetch(url)
+    const data = await res.json()
+
+    try {
+      setPokemon(data)
+      setRender(render + 1)
+      setTimeout(() => {
+        setLoading(true)
+      }, 10)
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   useEffect(() => {
     if (id <= 0 || id > 493) {
       alert("Pokémon não encontrado!")
       navigate("/pokedex")
     }
-    fetch(`${URL}${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      }
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setPokemon(data)
-        setRender(render + 1)
-      })
-      .catch(err => console.log(err))
+    const pokeApiUrl = `${URL}${id}`
+    getPokemon(pokeApiUrl)
   }, [id])
 
   useEffect(() => {
@@ -64,6 +70,7 @@ const Pokedex = () => {
           setHeight(heightRef)
           break
       }
+      setLoading(false)
     }
   }, [render])
 
@@ -101,7 +108,7 @@ const Pokedex = () => {
         <div className={styles.pokedex_center_circle3}></div>
         <div className={styles.pokedex_center_main}>
           <img className={styles.pokedex_center_main_image} src={background} alt="Background" />
-          {pokemon.sprites && <img src={`../images/animated/${id}.gif`} alt={pokemon.name} id={id} className={styles.pokemon_image} />}
+          {loading && pokemon.sprites && <img src={`../images/animated/${id}.gif`} alt={pokemon.name} id={id} className={styles.pokemon_image} />}
           {pokemon.name && <p className={styles.pokemon_name}>{pokemon.name}</p>}
           <div className={styles.pokemon_types}>
             {pokemon.types && typeof pokemon.types[1] === "undefined" && (
