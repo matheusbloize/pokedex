@@ -9,7 +9,7 @@ const Home = () => {
 
   const generatePokemons = () => {
     const arr = []
-    for (let i = 1; i <= 493; i++) {
+    for (let i = 1; i <= 151; i++) {
       arr.push(<PokeCard number={i} key={i} />)
     }
     return arr
