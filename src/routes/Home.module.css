@@ -16,7 +16,7 @@
   filter: drop-shadow(6px 0px 1px #2468b1);
 }
 
-.pokedex_container {
+.pokedex_container_home {
   display: flex;
   flex-wrap: wrap;
   background-color: rgba(255, 255, 255, .2);
@@ -40,7 +40,7 @@
   }
 }
 
-.pokedex_container code {
+.pokedex_container_home code {
   display: flex;
   align-items: center;
   margin-left: 35%;

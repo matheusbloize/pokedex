@@ -23,12 +23,12 @@ const Home = () => {
     <div className={styles.home_container}>
       <h1>Pokédex</h1>
       {loading && (
-        <div className={`${styles.pokedex_container}`}>
+        <div className={`${styles.pokedex_container_home}`}>
           <code>Loading...</code>
         </div>
       )}
       {!loading && (
-        <div className={styles.pokedex_container}>
+        <div className={styles.pokedex_container_home}>
           {generatePokemons()}
         </div>
       )}

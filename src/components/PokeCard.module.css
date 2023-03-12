@@ -10,29 +10,34 @@
   border-radius: .5em;
   transition: .2s ease;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .pokedex_pokemon:hover {
   scale: 1.2;
-  /* mix-blend-mode: color-burn; */
-  /* mix-blend-mode: darken; */
-  /* mix-blend-mode: hard-light; */
-  /* mix-blend-mode: lighten; */
-  /* mix-blend-mode: multiply; */
-  /* mix-blend-mode: overlay; */
 }
 
-.pokedex_pokemon img {
-  width: 60%;
-  height: 60%;
+.pokedex_pokemon_image {
+  width: 100%;
+  height: 100%;
+  border-radius: .5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.pokedex_pokemon h2 {
+.pokedex_pokemon_info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+  font-weight: bold;
+}
+
+.pokedex_pokemon_info h2 {
   font-weight: 400;
   color: #121212;
   font-size: 1.2em;
-}
-
-.pokedex_pokemon p {
-  font-weight: bold;
+  margin-bottom: 0.2em;
 }
