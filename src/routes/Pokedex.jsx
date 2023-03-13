@@ -79,7 +79,6 @@ const Pokedex = () => {
       }
       setLoading(false)
     }
-    console.log(pokemon)
   }, [render])
 
   const getEasterEgg = () => {

@@ -20,10 +20,13 @@ const Home = () => {
   }
 
   setTimeout(() => {
-    setTimeout(() => {
-      document.querySelector("#root").children[0].children[0].children[1].style.marginTop = "2em"
-    }, 10)
     setLoading(false)
+  }, 4900)
+
+  setTimeout(() => {
+    if(document.querySelector("#root").children[0].children[0].children[1].classList.length >= 2 && document.querySelector("#root").children[0].children[0].children[1].classList[1].includes("start")) {
+      document.querySelector("#root").children[0].children[0].children[1].style.marginTop = "2em"
+    }
   }, 5000)
 
   return (

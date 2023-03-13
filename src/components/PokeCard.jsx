@@ -16,7 +16,11 @@ const PokeCard = ({ number }) => {
     const data = await res.json()
 
     try {
-      setPokemon(data)
+      setPokemon({
+        name: data.name,
+        types: data.types,
+        sprites: data.sprites.front_default
+      })
       setTimeout(() => {
         setLoading(true)
       }, 1000)
@@ -50,7 +54,7 @@ const PokeCard = ({ number }) => {
     <Link to={`pokedex/${number}`} className={styles.pokedex_pokemon}>
       {!loading && <h2 style={{ color: "#333", fontSize: "1.2em" }}>Loading...</h2>}
       <div className={styles.pokedex_pokemon_image} style={{ backgroundImage: `url('../images/types-bg/${background}.jpeg')`, backgroundSize: "cover" }}>
-        {pokemon.sprites && <img type-data={`${pokemon.types[0].type.name}`.toString()} src={`../images/animated/${number}.gif`} alt={pokemon.name} id={number} />}
+        {pokemon.sprites && <img type-data={`${pokemon.types[0].type.name}`.toString()} src={pokemon.sprites} alt={pokemon.name} id={number} />}
       </div>
       <div className={styles.pokedex_pokemon_info}>
         <h2>{pokemon.name}</h2>
