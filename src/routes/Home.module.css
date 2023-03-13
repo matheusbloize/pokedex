@@ -32,10 +32,12 @@
   0% {
     opacity: 0;
   }
+
   50% {
     opacity: 1;
   }
-  100%{
+
+  100% {
     opacity: 0;
   }
 }
@@ -43,7 +45,11 @@
 .pokedex_container_home code {
   display: flex;
   align-items: center;
-  margin-left: 35%;
-  font-size: 5em;
+  margin-left: 45%;
+  font-size: 2em;
   animation: blink 2s ease infinite;
+}
+
+.pokedex_start {
+  margin-top: 100em;
 }

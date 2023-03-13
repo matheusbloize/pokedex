@@ -7,7 +7,7 @@ import { useState } from "react"
 const Home = () => {
   const [loading, setLoading] = useState(true)
 
-  const generatePokemons = () => {
+  const generatePokemon = () => {
     const arr = []
     for (let i = 1; i <= 151; i++) {
       arr.push(<PokeCard number={i} key={i} />)
@@ -15,9 +15,16 @@ const Home = () => {
     return arr
   }
 
+  const showPokemon = () => {
+    return generatePokemon()
+  }
+
   setTimeout(() => {
+    setTimeout(() => {
+      document.querySelector("#root").children[0].children[0].children[1].style.marginTop = "2em"
+    }, 10)
     setLoading(false)
-  }, 3000)
+  }, 5000)
 
   return (
     <div className={styles.home_container}>
@@ -27,11 +34,9 @@ const Home = () => {
           <code>Loading...</code>
         </div>
       )}
-      {!loading && (
-        <div className={styles.pokedex_container_home}>
-          {generatePokemons()}
-        </div>
-      )}
+      <div className={`${styles.pokedex_container_home} ${styles.pokedex_start}`}>
+        {showPokemon()}
+      </div>
     </div>
   )
 }

@@ -17,17 +17,19 @@ const PokeCard = ({ number }) => {
 
     try {
       setPokemon(data)
-      setLoading(false)
+      setTimeout(() => {
+        setLoading(true)
+      }, 1000)
     } catch (err) {
       document.querySelector("#root").children[0].children[0].children[1].innerHTML = "Aconteceu um erro ao buscar um ou mais Pokémon, recarregando a página..."
-        document.querySelector("#root").children[0].children[0].children[1].style.display = "flex"
-        document.querySelector("#root").children[0].children[0].children[1].style.justifyContent = "center"
-        document.querySelector("#root").children[0].children[0].children[1].style.alignItems = "center"
-        document.querySelector("#root").children[0].children[0].children[1].style.scale = 1.5
-        console.log(err)
-        setTimeout(() => {
-          location.reload()
-        }, 3500)
+      document.querySelector("#root").children[0].children[0].children[1].style.display = "flex"
+      document.querySelector("#root").children[0].children[0].children[1].style.justifyContent = "center"
+      document.querySelector("#root").children[0].children[0].children[1].style.alignItems = "center"
+      document.querySelector("#root").children[0].children[0].children[1].style.scale = 1.5
+      console.log(err)
+      setTimeout(() => {
+        location.reload()
+      }, 3500)
     }
   }
 
@@ -41,11 +43,12 @@ const PokeCard = ({ number }) => {
       const type = pokemon.types[0].type.name
       setBackground(type)
     }
+    setLoading(false)
   }, [pokemon])
 
   return (
     <Link to={`pokedex/${number}`} className={styles.pokedex_pokemon}>
-      {loading && <h2 style={{ color: "#333", fontSize: "1.2em" }}>Loading...</h2>}
+      {!loading && <h2 style={{ color: "#333", fontSize: "1.2em" }}>Loading...</h2>}
       <div className={styles.pokedex_pokemon_image} style={{ backgroundImage: `url('../images/types-bg/${background}.jpeg')`, backgroundSize: "cover" }}>
         {pokemon.sprites && <img type-data={`${pokemon.types[0].type.name}`.toString()} src={`../images/animated/${number}.gif`} alt={pokemon.name} id={number} />}
       </div>

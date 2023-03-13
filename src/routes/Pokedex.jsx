@@ -23,11 +23,18 @@ const Pokedex = () => {
     const data = await res.json()
 
     try {
-      setPokemon(data)
+      setPokemon({
+        id: data.id,
+        name: data.name,
+        types: data.types,
+        weight: data.weight,
+        height: data.height,
+        stats: data.stats
+      })
       setRender(render + 1)
       setTimeout(() => {
         setLoading(true)
-      }, 10)
+      }, 1000)
     } catch (err) {
       console.log(err)
     }
@@ -72,6 +79,7 @@ const Pokedex = () => {
       }
       setLoading(false)
     }
+    console.log(pokemon)
   }, [render])
 
   const getEasterEgg = () => {
@@ -108,10 +116,10 @@ const Pokedex = () => {
         <div className={styles.pokedex_center_circle3}></div>
         <div className={styles.pokedex_center_main}>
           <img className={styles.pokedex_center_main_image} src={background} alt="Background" />
-          {loading && pokemon.sprites && <img src={`../images/animated/${id}.gif`} alt={pokemon.name} id={id} className={styles.pokemon_image} />}
-          {pokemon.name && <p className={styles.pokemon_name}>{pokemon.name}</p>}
+          {loading && pokemon.name && <img src={`../images/animated/${id}.gif`} alt={pokemon.name} id={id} className={styles.pokemon_image} />}
+          {loading && pokemon.name && <p className={styles.pokemon_name}>{pokemon.name}</p>}
           <div className={styles.pokemon_types}>
-            {pokemon.types && typeof pokemon.types[1] === "undefined" && (
+            {loading && pokemon.types && typeof pokemon.types[1] === "undefined" && (
               <div className={styles.pokemon_type}>
                 <div className={styles.pokemon_type_div}>
                   <p>
@@ -126,7 +134,7 @@ const Pokedex = () => {
                 </div>
               </div>
             )}
-            {pokemon.types && typeof pokemon.types[1] !== "undefined" && (
+            {loading && pokemon.types && typeof pokemon.types[1] !== "undefined" && (
               <div className={styles.pokemon_type}>
                 <div className={styles.pokemon_type_div}>
                   <p>
@@ -143,7 +151,7 @@ const Pokedex = () => {
               </div>
             )}
           </div>
-          {pokemon.stats && (
+          {loading && pokemon.stats && (
             <div className={styles.pokedex_center_stats}>
               <p>hp:{pokemon.stats[0].base_stat}</p>
               <p>attack:{pokemon.stats[1].base_stat}</p>

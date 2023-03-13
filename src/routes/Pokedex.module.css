@@ -8,6 +8,8 @@
   width: 30em;
   height: 45em;
   border-radius: 1.2em;
+  -webkit-user-drag: none;
+  user-select: none;
 }
 
 .pokedex_top {
@@ -276,6 +278,7 @@
   border-radius: 1em;
   z-index: -1;
   filter: blur(5px);
+  -webkit-user-drag: none;
 }
 
 .pokemon_image {
@@ -285,6 +288,8 @@
   scale: 1.75;
   transition: .2s ease;
   z-index: 1;
+  -webkit-user-drag: none;
+  user-select: none;
 }
 
 .pokemon_image:hover {
@@ -332,6 +337,7 @@
 .pokemon_type_img2 {
   width: 3em;
   height: 4em;
+  -webkit-user-drag: none;
 }
 
 .pokemon_type_style2 {

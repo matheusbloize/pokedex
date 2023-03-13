@@ -6,6 +6,8 @@
 .background {
   height: 100vh;
   width: 100vw;
+  -webkit-user-drag: none;
+  user-select: none;
 }
 
 @media screen and (max-width: 500px) {
