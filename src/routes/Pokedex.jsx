@@ -32,21 +32,19 @@ const Pokedex = () => {
         stats: data.stats
       })
       setRender(render + 1)
-      setTimeout(() => {
-        setLoading(true)
-      }, 1000)
     } catch (err) {
       console.log(err)
     }
   }
 
   useEffect(() => {
-    if (id <= 0 || id > 493) {
+    if (id <= 0 || id > 151) {
       alert("Pokémon não encontrado!")
       navigate("/pokedex")
     }
     const pokeApiUrl = `${URL}${id}`
     getPokemon(pokeApiUrl)
+    setLoading(true)
   }, [id])
 
   useEffect(() => {
@@ -77,8 +75,8 @@ const Pokedex = () => {
           setHeight(heightRef)
           break
       }
-      setLoading(false)
     }
+    setLoading(true)
   }, [render])
 
   const getEasterEgg = () => {
@@ -87,6 +85,10 @@ const Pokedex = () => {
 
   const takeOutEasterEgg = () => {
     document.querySelector("#root").children[0].children[0].children[0].children[0].querySelector("svg").style.display = "none"
+  }
+
+  const changePokemon = () => {
+    setRender(render + 1)
   }
 
   return (
@@ -167,16 +169,16 @@ const Pokedex = () => {
         <div className={styles.pokedex_right2}></div>
       </div>
       <div className={styles.pokedex_controller}>
-        <Link className={styles.pokedex_controller_top} to={`/pokedex/${parseInt(id) + 1}`} onClick={() => setRender(render + 1)}>
+        <Link className={styles.pokedex_controller_top} to={`/pokedex/${parseInt(id) + 1}`} onClick={() => changePokemon()}>
           <BsArrowRight />
         </Link>
-        <Link className={styles.pokedex_controller_right} to={`/pokedex/${parseInt(id) + 1}`} onClick={() => setRender(render + 1)}>
+        <Link className={styles.pokedex_controller_right} to={`/pokedex/${parseInt(id) + 1}`} onClick={() => changePokemon()}>
           <BsArrowRight />
         </Link>
-        <Link className={styles.pokedex_controller_bottom} to={`/pokedex/${parseInt(id) - 1}`} onClick={() => setRender(render + 1)}>
+        <Link className={styles.pokedex_controller_bottom} to={`/pokedex/${parseInt(id) - 1}`} onClick={() => changePokemon()}>
           <BsArrowRight />
         </Link>
-        <Link className={styles.pokedex_controller_left} to={`/pokedex/${parseInt(id) - 1}`} onClick={() => setRender(render + 1)}>
+        <Link className={styles.pokedex_controller_left} to={`/pokedex/${parseInt(id) - 1}`} onClick={() => changePokemon()}>
           <BsArrowRight />
         </Link>
         <div className={styles.pokedex_controller_mid}></div>
