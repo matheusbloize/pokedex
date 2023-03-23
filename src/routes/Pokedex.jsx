@@ -5,7 +5,7 @@ import background from "../assets/background.jpg"
 import { BsArrowRight, BsArrowReturnLeft, BsLinkedin } from "react-icons/bs"
 
 import { useParams, useNavigate, Link } from "react-router-dom"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 
 const URL = "https://pokeapi.co/api/v2/pokemon/"
 
@@ -17,6 +17,7 @@ const Pokedex = () => {
   const [loading, setLoading] = useState(false)
   const { id } = useParams()
   const navigate = useNavigate()
+  const imgRef = useRef()
 
   const getPokemon = async (url) => {
     const res = await fetch(url)
@@ -32,6 +33,12 @@ const Pokedex = () => {
         stats: data.stats
       })
       setRender(render + 1)
+      setTimeout(() => {
+        setLoading(true)
+      }, 1000)
+      setTimeout(() => {
+        imgRef.current.style.display = "inline-block"
+      }, 1100)
     } catch (err) {
       console.log(err)
     }
@@ -44,10 +51,10 @@ const Pokedex = () => {
     }
     const pokeApiUrl = `${URL}${id}`
     getPokemon(pokeApiUrl)
-    setLoading(true)
   }, [id])
 
   useEffect(() => {
+    setLoading(false)
     if (pokemon.stats) {
       let weightRef
       switch (pokemon.weight.toString().length) {
@@ -76,7 +83,6 @@ const Pokedex = () => {
           break
       }
     }
-    setLoading(true)
   }, [render])
 
   const getEasterEgg = () => {
@@ -117,16 +123,16 @@ const Pokedex = () => {
         <div className={styles.pokedex_center_circle3}></div>
         <div className={styles.pokedex_center_main}>
           <img className={styles.pokedex_center_main_image} src={background} alt="Background" />
-          {loading && pokemon.name && <img src={`../images/animated/${id}.gif`} alt={pokemon.name} id={id} className={styles.pokemon_image} />}
-          {loading && pokemon.name && <p className={styles.pokemon_name}>{pokemon.name}</p>}
-          <div className={styles.pokemon_types}>
+          {loading && pokemon.name && <img ref={imgRef} src={`../images/animated/${id}.gif`} alt={pokemon.name} id={id} className={`${styles.pokemon_image}`} />}
+          {loading && pokemon.name && <p className={`${styles.pokemon_name}`}>{pokemon.name}</p>}
+          <div>
             {loading && pokemon.types && typeof pokemon.types[1] === "undefined" && (
               <div className={styles.pokemon_type}>
                 <div className={styles.pokemon_type_div}>
                   <p>
-                    <span className={styles.pokemon_type_style1}>{pokemon.types[0].type.name}</span>
+                    <span className={`${styles.pokemon_type_style1}`}>{pokemon.types[0].type.name}</span>
                   </p>
-                  <img className={styles.pokemon_type_img1} src={`../images/types-icons/${pokemon.types[0].type.name}.png`} alt={pokemon.types[0].type.name} />
+                  <img className={`${styles.pokemon_type_img1}`} src={`../images/types-icons/${pokemon.types[0].type.name}.png`} alt={pokemon.types[0].type.name} />
                 </div>
                 <div>
                   <p>
@@ -139,21 +145,21 @@ const Pokedex = () => {
               <div className={styles.pokemon_type}>
                 <div className={styles.pokemon_type_div}>
                   <p>
-                    <span className={styles.pokemon_type_style1}>{pokemon.types[0].type.name}</span>
+                    <span className={`${styles.pokemon_type_style1}`}>{pokemon.types[0].type.name}</span>
                   </p>
-                  <img className={styles.pokemon_type_img1} src={`../images/types-icons/${pokemon.types[0].type.name}.png`} alt={pokemon.types[0].type.name} />
+                  <img className={`${styles.pokemon_type_img1}`} src={`../images/types-icons/${pokemon.types[0].type.name}.png`} alt={pokemon.types[0].type.name} />
                 </div>
                 <div className={styles.pokemon_type_div}>
                   <p>
-                    <span className={styles.pokemon_type_style2}>{pokemon.types[1].type.name}</span>
+                    <span className={`${styles.pokemon_type_style2}`}>{pokemon.types[1].type.name}</span>
                   </p>
-                  <img className={styles.pokemon_type_img2} src={`../images/types-icons/${pokemon.types[1].type.name}.png`} alt={pokemon.types[1].type.name} />
+                  <img className={`${styles.pokemon_type_img2}`} src={`../images/types-icons/${pokemon.types[1].type.name}.png`} alt={pokemon.types[1].type.name} />
                 </div>
               </div>
             )}
           </div>
           {loading && pokemon.stats && (
-            <div className={styles.pokedex_center_stats}>
+            <div className={`${styles.pokedex_center_stats}`}>
               <p>hp:{pokemon.stats[0].base_stat}</p>
               <p>attack:{pokemon.stats[1].base_stat}</p>
               <p>defense:{pokemon.stats[2].base_stat}</p>

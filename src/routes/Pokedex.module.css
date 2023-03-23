@@ -290,6 +290,7 @@
   z-index: 1;
   -webkit-user-drag: none;
   user-select: none;
+  display: none;
 }
 
 .pokemon_image:hover {
